@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>福華電子｜人才配置與發展鑑別評定系統</title>
+<style>
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-2:#f8fafc;
+  --ink:#172536;
+  --muted:#66758a;
+  --line:#dfe6ee;
+  --line-strong:#cbd5e1;
+  --navy:#17324d;
+  --navy-2:#214969;
+  --blue:#2e6ea6;
+  --blue-soft:#eaf3fb;
+  --orange:#df6b3b;
+  --orange-soft:#fff2ec;
+  --green:#2f806b;
+  --green-soft:#eaf6f1;
+  --yellow:#b48913;
+  --yellow-soft:#fff8dd;
+  --red:#a94e4e;
+  --red-soft:#fdf0ef;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.04),0 5px 14px rgba(15,23,42,.04);
+  --shadow-md:0 12px 32px rgba(15,23,42,.08);
+  --shadow-lg:0 24px 60px rgba(15,23,42,.12);
+  --radius:16px;
+  --radius-sm:10px;
+  --font:"Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 8% -5%,rgba(46,110,166,.08),transparent 27rem),
+    linear-gradient(180deg,#f7f9fc 0,#f3f6fa 16rem,#f3f6fa 100%);
+  color:var(--ink);
+  font-family:var(--font);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1910px,calc(100% - 10px));margin-inline:auto}
+.top{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(118deg,#122b43 0%,#193b57 58%,#214b69 100%);
+  color:white;
+  padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  box-shadow:0 10px 24px rgba(9,30,50,.12);
+}
+.top::after{
+  content:"";
+  position:absolute;
+  width:320px;height:320px;border-radius:50%;
+  right:-110px;top:-210px;
+  border:52px solid rgba(255,255,255,.035);
+}
+.top .wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.brand{
+  font-size:22px;
+  line-height:1.35;
+  font-weight:800;
+  letter-spacing:.025em;
+  position:relative;
+  z-index:1;
+}
+.sub{
+  font-size:13px;
+  line-height:1.6;
+  opacity:.82;
+  margin-top:8px;
+  letter-spacing:.05em;
+  position:relative;
+  z-index:1;
+}
+@media(max-width:720px){
+  .brand{font-size:17px}
+  .sub{font-size:11px;letter-spacing:.02em}
+}
+.main{padding:32px 0 64px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(248,251,254,.98));
+  border:1px solid rgba(203,213,225,.9);
+  border-radius:22px;
+  padding:30px 32px;
+  box-shadow:var(--shadow-md);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,var(--blue),var(--orange));
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;border-radius:50%;
+  right:-90px;top:-150px;
+  background:radial-gradient(circle,rgba(46,110,166,.11),rgba(46,110,166,0) 68%);
+  pointer-events:none;
+}
+h1{margin:0;font-size:clamp(28px,4vw,42px);letter-spacing:-.035em;line-height:1.2;color:#17324d;position:relative;z-index:1;text-align:center}
+.lead{
+  color:var(--muted);
+  line-height:1.9;
+  margin:16px auto 0;
+  max-width:1380px;
+  font-size:15px;
+  position:relative;
+  z-index:1;
+  text-align:center;
+}
+.lead .lead-main,.lead .lead-purpose{display:block}
+.lead .lead-main{font-size:16px;color:#526b80}
+.lead .lead-purpose{margin-top:5px;color:#70879a}
+.lead b{color:#284967;font-weight:800}
+.badge{display:inline-flex;margin-top:14px;padding:7px 12px;border-radius:999px;background:var(--orange-soft);color:#a84f32;font-weight:800;font-size:12px}
+.tabs{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin:22px 0 18px;
+  padding:6px;
+  width:max-content;max-width:100%;
+  background:rgba(255,255,255,.72);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow-sm);
+  backdrop-filter:blur(10px);
+}
+.tab{
+  border:0;background:transparent;color:#53657a;
+  padding:10px 16px;border-radius:9px;font-weight:800;
+  transition:.18s ease;
+}
+.tab:hover{background:#f1f5f9;color:var(--navy)}
+.tab.active{
+  background:linear-gradient(135deg,#193b57,#244d6c);
+  color:white;
+  box-shadow:0 5px 14px rgba(23,50,77,.2);
+}
+.panel{display:none}
+.panel.active{display:block;animation:panelIn .22s ease both}
+@keyframes panelIn{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+.card{
+  background:rgba(255,255,255,.97);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow-sm);
+}
+.card h2{margin:0 0 7px;font-size:20px;letter-spacing:-.015em;color:#1e3851}
+.card h3{color:#294a66}
+.help{color:var(--muted);font-size:13px;line-height:1.75}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{
+  border:1px solid transparent;
+  border-radius:9px;
+  padding:9px 14px;
+  font-weight:800;
+  font-size:13px;
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease,border-color .15s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(15,23,42,.09)}
+.btn:active{transform:translateY(0)}
+.primary{background:linear-gradient(135deg,#dc6738,#e57a4f);color:white;box-shadow:0 5px 13px rgba(223,107,59,.2)}
+.secondary{background:#f7f9fb;color:#2a4b67;border-color:#dce4ec}
+.secondary:hover{background:#eef3f7}
+.danger{background:#fff5f4;color:#9b4945;border-color:#f2d7d4}
+.file{display:none}
+.table-action-bar{display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;padding:0 2px}
+.table-action-bar .btn{min-width:132px}
+.table-wrap{
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:0;
+  box-shadow:0 9px 28px rgba(15,23,42,.06);
+  background:white;
+}
+.data{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}
+.data th,.data td{border-bottom:1px solid #e7edf3;border-right:1px solid #edf1f5;padding:8px;vertical-align:top}
+.data tr:last-child td{border-bottom:0}
+.data th:last-child,.data td:last-child{border-right:0}
+.data th{
+  position:sticky;top:0;
+  background:linear-gradient(180deg,#21435f,#18364f);
+  color:white;
+  font-size:12px;
+  z-index:3;
+  padding:11px 9px;
+  line-height:1.5;
+  letter-spacing:.01em;
+  border-color:rgba(255,255,255,.08);
+}
+.data tbody tr{transition:background .15s ease}
+.data tbody tr:hover{background:#fbfdff}
+.data input,.data select,.data textarea{
+  width:100%;min-width:96px;
+  border:1px solid #d8e0e8;
+  border-radius:8px;
+  padding:8px 9px;
+  background:#fff9df;
+  color:var(--ink);
+  outline:none;
+  transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;
+}
+.data input:focus,.data select:focus,.data textarea:focus{
+  border-color:#79a9cf;
+  box-shadow:0 0 0 3px rgba(46,110,166,.12);
+  background:#fffdf1;
+}
+.data textarea{min-width:230px;min-height:66px;resize:vertical;line-height:1.55}
+.calc{background:#edf7f2!important;color:#245f50;font-weight:800;white-space:nowrap}
+.small{font-size:11px;opacity:.8;font-weight:500}
+.matrix-head{
+  display:grid;
+  grid-template-columns:190px repeat(3,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.axis,.cell{
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  min-height:112px;
+  padding:14px;
+}
+.axis{
+  display:grid;place-items:center;text-align:center;
+  font-weight:800;font-size:13px;line-height:1.55;
+  color:#38546c;
+  background:linear-gradient(145deg,#f4f7fa,#edf2f7);
+  border-color:#d7e0e8;
+}
+.cell{
+  position:relative;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  overflow:hidden;
+}
+.cell::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#cbd5e1}
+.cell:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,23,42,.08);border-color:#cbd7e3}
+.cell h3{font-size:15px;margin:0 0 6px;color:#1f3b54;letter-spacing:-.01em}
+.cell p{font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.55}
+#workMatrix .cell:nth-child(6)::before,#workMatrix .cell:nth-child(7)::before,#workMatrix .cell:nth-child(8)::before{background:var(--green)}
+#workMatrix .cell:nth-child(10)::before,#workMatrix .cell:nth-child(11)::before,#workMatrix .cell:nth-child(12)::before{background:#c99a28}
+#workMatrix .cell:nth-child(14)::before,#workMatrix .cell:nth-child(15)::before,#workMatrix .cell:nth-child(16)::before{background:#c27062}
+#talentMatrix .cell:nth-child(6)::before,#talentMatrix .cell:nth-child(7)::before,#talentMatrix .cell:nth-child(8)::before{background:var(--green)}
+#talentMatrix .cell:nth-child(10)::before,#talentMatrix .cell:nth-child(11)::before,#talentMatrix .cell:nth-child(12)::before{background:#c99a28}
+#talentMatrix .cell:nth-child(14)::before,#talentMatrix .cell:nth-child(15)::before,#talentMatrix .cell:nth-child(16)::before{background:#c27062}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:11px;padding:5px 8px;background:#eef4f9;color:#2d5878;border:1px solid #d9e6f0;border-radius:999px;font-weight:700}
+.count{font-weight:800;color:#bf5b35;font-size:12px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.work-summary{grid-template-columns:repeat(6,1fr)}
+.quick-position{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:linear-gradient(145deg,#fbfdff,#f5f8fb);
+  padding:14px 16px;
+}
+.quick-position-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.quick-position-head b{
+  color:#193b57;
+  font-size:14px;
+}
+.quick-position-head span{
+  color:var(--muted);
+  font-size:11px;
+}
+.quick-position-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.quick-position-item{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid #d9e4ec;
+  border-radius:10px;
+  padding:8px 10px;
+  background:#fff;
+  color:#38546c;
+  font-size:12px;
+  line-height:1.45;
+}
+.quick-position-item strong{color:#193b57}
+.quick-position-no{
+  display:inline-grid;
+  place-items:center;
+  min-width:24px;
+  height:24px;
+  padding:0 6px;
+  border-radius:7px;
+  background:#eaf3fb;
+  color:#2e6ea6;
+  font-weight:900;
+  font-size:11px;
+}
+.quick-position-item.incomplete{
+  background:#fff8f3;
+  border-color:#f0d8ca;
+  color:#805446;
+}
+.quick-position-item.incomplete .quick-position-no{
+  background:#fff0e7;
+  color:#b25e3d;
+}
+.quick-position-empty{
+  color:var(--muted);
+  font-size:12px;
+  padding:4px 0;
+}
+@media(max-width:640px){
+  .quick-position{padding:12px}
+  .quick-position-list{display:grid;grid-template-columns:1fr}
+  .quick-position-item{width:100%}
+}
+
+.metric{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,#fbfcfe,#f5f8fb);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:14px 16px;
+  color:#617287;
+  font-size:12px;
+}
+.metric::after{content:"";position:absolute;right:-20px;bottom:-28px;width:84px;height:84px;border-radius:50%;background:rgba(46,110,166,.05)}
+.metric b{display:block;font-size:24px;margin-top:6px;color:#193b57;letter-spacing:-.03em}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.notice{
+  padding:14px 16px;
+  border:1px solid #f1d8cc;
+  border-left:4px solid var(--orange);
+  background:linear-gradient(90deg,#fff7f2,#fffaf7);
+  border-radius:10px;
+  line-height:1.75;
+  color:#5a4b46;
+}
+.mode{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mode select{
+  padding:8px 10px;
+  border:1px solid var(--line-strong);
+  border-radius:8px;
+  color:#284860;background:white;outline:none;
+}
+.mode select:focus{border-color:#79a9cf;box-shadow:0 0 0 3px rgba(46,110,166,.12)}
+.grid-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.grid-table th,.grid-table td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:12px 13px;text-align:left;line-height:1.65;vertical-align:top}
+.grid-table tr:last-child td{border-bottom:0}
+.grid-table th:last-child,.grid-table td:last-child{border-right:0}
+.grid-table th{background:#eef3f7;color:#284860;font-weight:800}
+.footer{color:#718096;font-size:12px;text-align:center;padding:30px 18px 36px;line-height:1.65}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#edf1f5}
+::-webkit-scrollbar-thumb{background:#c6d1dc;border-radius:999px;border:2px solid #edf1f5}
+::-webkit-scrollbar-thumb:hover{background:#aab9c7}
+
+.management-summary{margin-top:26px;border-top:1px solid var(--line);padding-top:22px}
+.management-summary-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.management-summary-title h3{margin:0;color:#193b57;font-size:18px;letter-spacing:-.02em}
+.management-summary-title p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.65}
+.management-summary-label{font-size:10px;font-weight:800;letter-spacing:.16em;color:#8b99a7}
+.management-summary-table{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.management-summary-row{display:grid;grid-template-columns:minmax(160px,1fr) minmax(260px,1.8fr) 76px minmax(240px,1.6fr);align-items:center;border-top:1px solid var(--line)}
+.management-summary-row:first-child{border-top:0}
+.management-summary-row.header{background:#eef3f7;color:#607487;font-size:11px;font-weight:800;letter-spacing:.04em}
+.management-summary-row>div{padding:12px 14px;min-width:0}
+.management-summary-position{display:flex;align-items:center;gap:9px;color:#284860;font-weight:800}
+.management-summary-no{width:24px;height:24px;display:grid;place-items:center;border-radius:7px;background:#edf4f8;color:#2e6ea6;font-size:11px;font-weight:900;flex:0 0 auto}
+.management-summary-meaning{color:#617287;font-size:12px;line-height:1.65}
+.management-summary-count{font-size:18px;font-weight:800;color:#193b57}
+.management-summary-members{display:flex;flex-wrap:wrap;gap:6px}
+.management-member{display:inline-flex;align-items:center;border:1px solid #dbe5ec;border-radius:999px;padding:5px 8px;background:#f7fafc;color:#4d6477;font-size:11px;font-weight:700}
+.management-summary-empty{border:1px dashed #cfdbe5;border-radius:12px;padding:24px;background:#f8fafc;color:#718096;text-align:center;font-size:12px;line-height:1.7}
+
+
+.management-focus-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.management-focus-card{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:16px;
+  background:linear-gradient(145deg,#fbfcfe,#f6f9fb);
+}
+.management-focus-card h3{
+  margin:4px 0 12px;
+  font-size:16px;
+  color:#193b57;
+}
+.management-focus-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:3px 12px;
+  align-items:center;
+  padding:10px 0;
+  border-top:1px solid var(--line);
+}
+.management-focus-item:first-of-type{border-top:0}
+.management-focus-item span{font-weight:800;color:#35536c;font-size:13px}
+.management-focus-item b{font-size:22px;color:#193b57}
+.management-focus-item small{grid-column:1/-1;color:var(--muted);font-size:11px}
+@media(max-width:720px){
+  .management-focus-grid{grid-template-columns:1fr}
+}
+
+.potential-rubric{font-size:12px}
+.potential-rubric th{text-align:center;background:#eef3f7;color:#284860}
+.potential-rubric td{min-width:150px}
+.potential-rubric td:first-child{min-width:195px;background:#f8fafc;color:#284860}
+@media(min-width:1280px){
+  .main{padding-top:24px}
+  .card{padding:18px}
+  .card.table-wrap{padding:0}
+  .data{width:100%;min-width:1660px;table-layout:auto}
+  .data th,.data td{padding:6px 5px}
+  .data th{font-size:11px;padding:9px 5px;line-height:1.35}
+  .data input,.data select,.data textarea{min-width:68px;padding:7px 6px;font-size:13px}
+  .data th:nth-child(1),.data td:nth-child(1){min-width:100px}
+  .data th:nth-child(2),.data td:nth-child(2){min-width:100px}
+  .data th:nth-child(3),.data td:nth-child(3){min-width:115px}
+  .data th:nth-child(4),.data td:nth-child(4){min-width:125px}
+  .data th:nth-child(5),.data td:nth-child(5){min-width:118px}
+  .data th:nth-child(6),.data td:nth-child(6),
+  .data th:nth-child(7),.data td:nth-child(7){min-width:78px}
+  .data th:nth-child(8),.data td:nth-child(8),
+  .data th:nth-child(9),.data td:nth-child(9),
+  .data th:nth-child(10),.data td:nth-child(10),
+  .data th:nth-child(11),.data td:nth-child(11){min-width:98px}
+  .data th:nth-child(12),.data td:nth-child(12){min-width:82px}
+  .data th:nth-child(13),.data td:nth-child(13){min-width:138px}
+  .data th:nth-child(14),.data td:nth-child(14){min-width:68px}
+}
+@media(max-width:980px){
+  .summary{grid-template-columns:1fr 1fr}
+  .matrix-head{grid-template-columns:130px repeat(3,minmax(220px,1fr));overflow:auto;padding-bottom:4px}
+  .wrap{width:min(100% - 16px,1910px)}
+  .hero{padding:24px}
+}
+@media(max-width:640px){
+  .top{padding:16px 0}.brand{font-size:17px}.sub{font-size:11px}
+  .main{padding-top:20px}.wrap{width:calc(100% - 18px)}
+  .hero{padding:22px 18px;border-radius:17px}h1{font-size:26px}.lead{font-size:13px}
+  .tabs{width:100%;flex-wrap:nowrap;overflow:auto;padding:5px;position:sticky;top:6px;z-index:8}
+  .tab{flex:0 0 auto;padding:9px 12px;font-size:12px}
+  .card{padding:16px;border-radius:14px}.summary{grid-template-columns:1fr 1fr;gap:8px}.metric{padding:12px}.metric b{font-size:21px}
+  .toolbar{gap:6px}.btn{padding:8px 10px}
+  .matrix-head{grid-template-columns:110px repeat(3,minmax(210px,1fr));gap:8px}
+  .axis,.cell{min-height:104px;padding:12px}
+  .management-summary-table{overflow-x:auto}.management-summary-row{min-width:760px}
+  .footer{padding-top:20px}
+}
+@media print{
+  body{background:white}.top,.tabs,.toolbar,.no-print{display:none!important}
+  .panel{display:block!important}.card,.hero{break-inside:avoid;box-shadow:none;background:white}
+  .main{padding:0}.wrap{width:100%}.matrix-head{gap:4px}.axis,.cell{min-height:80px}
+}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><div class="brand">福華電子股份有限公司｜人才配置與發展鑑別評定系統</div><div class="sub">工作配置矩陣＋人才九宮格｜內部人才盤點與發展評定工具</div></div></div>
+<main class="main wrap">
+<section class="hero"><h1>工作配置與人才發展雙軌評定</h1><p class="lead"><span class="lead-main">本系統整合 <b>工作配置矩陣（工作飽和度 × 工作價值度）</b> 與 <b>人才九宮格（績效 × 通用潛力評分）</b> 兩項評定工具</span><span class="lead-purpose">分別檢視人力配置狀態與人才發展定位，作為組織盤點、人才培育及管理決策之參考依據。</span></p></section>
+<div class="tabs no-print"><button class="tab active" data-tab="input">人員輸入</button><button class="tab" data-tab="work">工作配置矩陣</button><button class="tab" data-tab="talent">人才九宮格</button><button class="tab" data-tab="guide">規則說明</button></div>
+<section id="input" class="panel active">
+<div class="card"><h2>人員資料</h2><p class="help">黃色欄位為輸入。工作配置矩陣採「工作飽和度 × 工作價值度」；人才九宮格採「正式績效 × 通用潛力評分」。潛力由直屬主管依平日觀察，就四項通用構面評為 0～4 分；任職期間過短或觀察資料不足者可先留白。</p><div class="toolbar no-print"><button class="btn primary" onclick="addRow(true)">＋ 新增人員</button><button class="btn secondary" onclick="saveData()">儲存到瀏覽器</button><button class="btn secondary" onclick="exportJSON()">下載 JSON 備份</button><label class="btn secondary" for="jsonFile">匯入 JSON 還原</label><input id="jsonFile" class="file" type="file" accept=".json,application/json"><button class="btn secondary" onclick="exportCSV()">匯出 CSV</button><button class="btn secondary" onclick="downloadCSVExample()">下載 CSV 範例</button><label class="btn secondary" for="csvFile">匯入 CSV</label><input id="csvFile" class="file" type="file" accept=".csv,text/csv"><button class="btn danger" onclick="clearAll()">清除全部</button></div></div>
+<div class="card table-wrap"><table class="data"><thead><tr>
+<th>部門</th><th>姓名</th>
+<th>工作飽和度<br><span class="small">換算時數／天</span></th>
+<th>工作價值度<br><span class="small">自評40%＋主管評60%</span></th>
+<th>工作配置區</th>
+<th>上半年考績</th><th>下半年考績</th>
+<th>學習敏捷與適應<br><span class="small">0～4分</span></th>
+<th>問題判斷與解決<br><span class="small">0～4分</span></th>
+<th>主動承擔與成長動機<br><span class="small">0～4分</span></th>
+<th>協作影響與帶動<br><span class="small">0～4分</span></th>
+<th>潛力平均</th><th>人才九宮格</th><th>操作</th>
+</tr></thead><tbody id="rows"></tbody></table><div class="table-action-bar no-print"><button class="btn primary" onclick="addRow(true)">＋ 新增人員</button><span class="small">主管依通用行為標準直接選擇 0～4 分；資料不足時可先留白。CSV 中無考績資料者保留空白即可，仍可正常匯入；可先下載 CSV 範例確認欄位格式。</span></div></div>
+
+
+<div class="card">
+  <h2>管理摘要</h2>
+  <p class="help">依目前輸入資料即時彙整工作配置與人才發展狀態，供主管快速掌握重點；完整落點仍請至「工作配置矩陣」及「人才九宮格」頁籤查看。</p>
+
+  <div class="summary">
+    <div class="metric">人員總數<b id="mPeople">0</b></div>
+    <div class="metric">工作配置可判定<b id="mWorkReady">0</b></div>
+    <div class="metric">人才九宮格可判定<b id="mTalentReady">0</b></div>
+    <div class="metric">九宮格證據不足<b id="mPotentialPending">0</b></div>
+  </div>
+
+  <div class="management-focus-grid">
+    <div class="management-focus-card">
+      <div class="management-summary-label">WORKFORCE</div>
+      <h3>工作配置重點</h3>
+      <div class="management-focus-item">
+        <span>關鍵負荷區</span>
+        <b id="mCriticalLoad">0</b>
+        <small>高價值・高飽和</small>
+      </div>
+      <div class="management-focus-item">
+        <span>優先改善區</span>
+        <b id="mPriorityImprove">0</b>
+        <small>低價值・高飽和</small>
+      </div>
+    </div>
+
+    <div class="management-focus-card">
+      <div class="management-summary-label">TALENT</div>
+      <h3>人才發展重點</h3>
+      <div class="management-focus-item">
+        <span>明星／接班觀察</span>
+        <b id="mStarTalent">0</b>
+        <small>高潛力・高績效</small>
+      </div>
+      <div class="management-focus-item">
+        <span>成長／潛力待驗證</span>
+        <b id="mGrowthTalent">0</b>
+        <small>高潛力・中低績效</small>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section id="work"
+ class="panel">
+<div class="card"><h2>工作配置矩陣</h2><p class="help"><b>X 軸＝工作飽和度</b>（由《工作盤點表》換算時數／天取得）｜<b>Y 軸＝工作價值度</b>（自評加權總分×40%＋主管評加權總分×60%）。用於判讀目前工作量與工作價值的配置狀態。</p><div class="summary work-summary"><div class="metric">可判定人數<b id="wTotal">0</b></div><div class="metric">平均工作飽和度<b id="wHours">0.00</b></div><div class="metric">平均工作價值度<b id="wValue">0.00</b></div><div class="metric">高工作價值人數<b id="wHigh">0</b></div><div class="metric">中工作價值人數<b id="wMid">0</b></div><div class="metric">低工作價值人數<b id="wLow">0</b></div></div>
+<div class="quick-position">
+  <div class="quick-position-head"><b>落點快速摘要</b><span>快速呈現各人員配置落點，便於掌握整體分布</span></div>
+  <div id="workQuick" class="quick-position-list"></div>
+</div>
+<div id="workMatrix" class="matrix-head"></div><div id="workManagementSummary" class="management-summary"></div></div>
+</section>
+<section id="talent" class="panel">
+<div class="card"><div class="mode"><h2 style="margin:0">人才九宮格（績效 × 潛力）</h2><span>潛力門檻：</span><select id="mode" onchange="setPotentialMode(this.value)"><option value="initial">初步辨識（高≥2.5／中≥1.5）</option><option value="strict">嚴謹篩選（高≥3.0／中≥2.0）</option></select></div><p class="help">X 軸＝年度績效；Y 軸＝通用潛力評分。上下半年考績需完整，且四項潛力評分皆完成後，才產生人才九宮格落點；任一考績空白或觀察資料不足者，系統標示為「證據不足」，不勉強評定。</p><div class="summary"><div class="metric">可判定人數<b id="tTotal">0</b></div><div class="metric">高潛力人數<b id="tHigh">0</b></div><div class="metric">證據不足<b id="tMissing">0</b></div><div class="metric">平均潛力分數<b id="tAvg">—</b></div></div>
+<div class="quick-position">
+  <div class="quick-position-head"><b>落點快速摘要</b><span>快速呈現各人員九宮格落點及評定狀態</span></div>
+  <div id="talentQuick" class="quick-position-list"></div>
+</div>
+<div id="talentMatrix" class="matrix-head"></div><div id="talentManagementSummary" class="management-summary"></div></div>
+</section>
+<section id="guide" class="panel"><div class="card"><h2>核心規則</h2>
+<div class="notice"><b>系統功能與資料來源說明</b><ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">
+<li><b>工作配置矩陣</b>：以「工作飽和度 × 工作價值度」進行配置判定。資料來源為《工作盤點表》，其中工作飽和度採換算時數／天；工作價值度採自評加權總分×40%＋主管評加權總分×60%。</li>
+<li><b>人才九宮格</b>：以「績效 × 通用潛力評分」進行人才定位。績效採上下半年正式考績；潛力由主管依四項通用構面及平日觀察評為 0～4 分。</li>
+<li><b>通用性原則</b>：四項潛力構面適用於不同職類與職級，主管依受評者實際工作情境進行判斷。</li>
+<li><b>證據不足</b>：任職未滿完整評核期間、上半年或下半年任一考績缺漏，或主管尚無足夠潛力觀察資料時，系統不產生人才九宮格落點，並標示「證據不足」。</li>
+</ol></div>
+<table class="grid-table" style="margin-top:14px"><tr><th>工具</th><th>X 軸</th><th>Y 軸</th><th>回答的管理問題</th></tr>
+<tr><td>工作配置矩陣</td><td>工作飽和度：低&lt;7h；中7～&lt;9h；高≥9h</td><td>工作價值度＝自評加權總分×40%＋主管評加權總分×60%；低&lt;3、中3～&lt;4、高≥4</td><td>目前工作量與工作價值如何配置？</td></tr>
+<tr><td>人才九宮格</td><td>績效：年度考績代表分數÷20；低&lt;3、中3～&lt;4、高≥4</td><td>通用潛力平均：四構面各 0～4 分，四項皆完成後取平均</td><td>目前績效如何？主管是否已觀察到未來承擔更高複雜度／責任的潛力？</td></tr></table>
+<h3 style="margin-top:20px">考績代表分數</h3><p class="help">A+＝100、A＝95、A-＝83、M＝68、N＝30。代表分數僅供模型運算，不等同員工原始考績分數。</p>
+
+<h3>通用潛力四構面</h3>
+<p class="help"><b>學習敏捷與適應</b>、<b>問題判斷與解決</b>、<b>主動承擔與成長動機</b>、<b>協作影響與帶動</b>。每項 0～4 分；0 分代表已有足夠觀察但尚未展現，空白代表觀察資料不足／尚未評定。四項皆完成評分後取平均作為 Y 軸潛力分數。</p>
+
+<h3>潛力門檻與用途</h3>
+<div class="notice">
+  <b>何謂潛力門檻？</b> 潛力門檻是將四項潛力構面的平均分數，轉換為「高／中／低潛力」的分級標準，供人才九宮格定位使用。門檻切換<b>不會改變主管原始評分，也不會改變潛力平均分數</b>，只會調整高、中、低潛力的判定嚴格度與九宮格落點。
+  <table class="grid-table" style="margin-top:12px">
+    <tr><th>模式</th><th>高潛力</th><th>中潛力</th><th>低潛力</th><th>主要用途</th></tr>
+    <tr><td><b>初步辨識</b></td><td>≥2.5</td><td>1.5～&lt;2.5</td><td>&lt;1.5</td><td>適合第一輪人才盤點，較著重發現具發展可能的人選。</td></tr>
+    <tr><td><b>嚴謹篩選</b></td><td>≥3.0</td><td>2.0～&lt;3.0</td><td>&lt;2.0</td><td>適合接班、關鍵人才或需提高判定標準的篩選情境。</td></tr>
+  </table>
+</div>
+
+<table class="grid-table potential-rubric" style="margin-top:12px">
+<tr><th>構面</th><th>0 分</th><th>1 分</th><th>2 分</th><th>3 分</th><th>4 分</th></tr>
+<tr>
+<td><b>學習敏捷與適應</b><br><span class="small">吸收新知、面對變化、舉一反三</span></td>
+<td>熟悉工作仍需反覆指導，面對變化明顯難以適應</td>
+<td>可在明確指導下學習，新情境仍需較多協助</td>
+<td>能掌握新要求並完成調整，一般變化可自行適應</td>
+<td>能快速吸收新知、舉一反三，並主動調整做法</td>
+<td>能跨情境快速學習、整合新知，並形成可複製方法或協助他人適應</td>
+</tr>
+<tr>
+<td><b>問題判斷與解決</b><br><span class="small">辨識關鍵、判斷原因、處理陌生問題</span></td>
+<td>基本問題仍高度依賴他人判斷，問題容易重複發生</td>
+<td>能發現問題，但多需依照指示或他人方案處理</td>
+<td>能獨立處理常見問題，依經驗或流程提出可行方案</td>
+<td>能釐清較複雜問題、抓到關鍵原因並提出有效方案</td>
+<td>能處理陌生或跨領域問題、預判風險，並形成可延伸或可複製的解法</td>
+</tr>
+<tr>
+<td><b>主動承擔與成長動機</b><br><span class="small">責任感、挑戰意願、擴大承擔</span></td>
+<td>多為被動完成最低要求，需頻繁追蹤或提醒</td>
+<td>能完成交辦事項，但較少主動承擔額外責任</td>
+<td>對本職責任穩定，必要時願意承接額外任務</td>
+<td>會主動承擔更高難度或更大範圍任務，遇到困難仍持續推進</td>
+<td>持續尋求更高責任與挑戰，能主動補位並對結果高度承擔</td>
+</tr>
+<tr>
+<td><b>協作影響與帶動</b><br><span class="small">合作、溝通、建立共識、非職權影響</span></td>
+<td>協作常需他人介入，較難接受或整合不同意見</td>
+<td>能基本配合他人完成工作，但主動協調與影響力較有限</td>
+<td>能與不同對象有效合作、清楚溝通並完成共同任務</td>
+<td>能整合不同意見、建立共識，並推動事情往前進</td>
+<td>即使沒有正式職權，也能跨角色／部門建立信任、帶動他人並促成共同成果</td>
+</tr>
+</table>
+
+</div></section>
+</main><div class="footer">內部人才盤點與發展評定工具｜結果應搭配工作脈絡、實際成果、主管面談與組織需求，不宜作為單一人事決策依據。</div>
+<script>
+const STORAGE='fhc_dual_matrix_20260913_universal_potential_v1';
+const MODE_STORAGE='fhc_dual_matrix_potential_mode_v1';
+const APP_VERSION='v19-input-hygiene-compatibility';
+const gradeScore={'A+':100,'A':95,'A-':83,'M':68,'N':30};
+const workBoxes=[
+{id:1,name:'增量配置區',desc:'高價值・低飽和｜工作價值高且仍有工作量配置空間'},
+{id:2,name:'核心配置區',desc:'高價值・中飽和｜工作價值高且工作量配置相對均衡'},
+{id:3,name:'關鍵負荷區',desc:'高價值・高飽和｜工作價值高且工作量已滿載或偏高'},
+{id:4,name:'任務補強區',desc:'中價值・低飽和｜仍有工作量配置空間，可檢視任務補強'},
+{id:5,name:'穩定配置區',desc:'中價值・中飽和｜目前工作量與工作價值配置相對穩定'},
+{id:6,name:'效率檢視區',desc:'中價值・高飽和｜工作量偏高，宜檢視流程與任務配置'},
+{id:7,name:'職掌檢視區',desc:'低價值・低飽和｜工作量與工作價值皆偏低，宜檢視職掌'},
+{id:8,name:'工作重整區',desc:'低價值・中飽和｜工作量正常但工作價值偏低，宜檢視工作組成'},
+{id:9,name:'優先改善區',desc:'低價值・高飽和｜工作量偏高且工作價值偏低，宜優先改善配置'}];
+const talentBoxes=[
+{id:1,name:'潛力待驗證',desc:'高潛力・低績效｜主管潛力評估高，但目前績效仍需追蹤'},
+{id:2,name:'成長人才',desc:'高潛力・中績效｜潛力評估高，績效具進一步發展空間'},
+{id:3,name:'明星／接班觀察',desc:'高潛力・高績效｜目前績效與未來發展潛力皆高'},
+{id:4,name:'改善觀察',desc:'中潛力・低績效｜具一定發展潛力，但目前績效需改善'},
+{id:5,name:'核心中堅',desc:'中潛力・中績效｜績效與潛力皆在中段'},
+{id:6,name:'穩定高績效',desc:'中潛力・高績效｜目前績效強，潛力評估位於中段'},
+{id:7,name:'優先檢視',desc:'低潛力・低績效｜優先釐清績效與發展條件'},
+{id:8,name:'穩定貢獻／職務適配',desc:'低潛力・中績效｜目前工作適配，可依意願與職務需求發展'},
+{id:9,name:'專業骨幹／成熟人才',desc:'低潛力・高績效｜目前績效高，後續發展可依職務需求與意願規劃'}];
+let people=[];
+const blank=()=>({dept:'',name:'',hours:'',value:'',h1:'',h2:'',p1:'',p2:'',p3:'',p4:''});
+function validPerson(p){return String(p?.name??'').trim()!==''}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function num(v){if(v===null||v===undefined)return null;const s=String(v).trim();if(s==='')return null;let n=Number(s);return Number.isFinite(n)?n:null}
+function perf(p){
+  const h1=String(p.h1??'').trim(),h2=String(p.h2??'').trim();
+  if(!(h1 in gradeScore)||!(h2 in gradeScore))return null;
+  return ((gradeScore[h1]+gradeScore[h2])/2)/20
+}
+function performanceStatus(p){
+  const h1=String(p.h1??'').trim(),h2=String(p.h2??'').trim();
+  if(h1===''||h2==='')return '證據不足｜績效未完整';
+  if(!(h1 in gradeScore)||!(h2 in gradeScore))return '證據不足｜績效資料異常';
+  return '可判定';
+}
+function loadLevel(p){let h=num(p.hours);return h===null?null:h<7?'低':h<9?'中':'高'}
+function valueLevel(p){let v=num(p.value);return v===null?null:v>=4?'高':v>=3?'中':'低'}
+function workId(p){let y=valueLevel(p),x=loadLevel(p);if(!x||!y)return null;let r=y==='高'?0:y==='中'?1:2,c=x==='低'?0:x==='中'?1:2;return r*3+c+1}
+function pscore(v){let n=num(v);return n!==null&&n>=0&&n<=4?n:null}
+function potential(p){
+  let vals=[p.p1,p.p2,p.p3,p.p4];
+  let touched=vals.some(v=>String(v??'').trim()!=='');
+  if(!touched)return {status:'尚未評估',avg:null,index:null,level:null};
+  let scores=vals.map(pscore);
+  if(scores.some(v=>v===null))return {status:'評估未完整',avg:null,index:null,level:null};
+  let avg=scores.reduce((a,b)=>a+b,0)/4,mode=document.getElementById('mode')?.value||'initial';
+  let level=mode==='strict'?(avg>=3?'高':avg>=2?'中':'低'):(avg>=2.5?'高':avg>=1.5?'中':'低');
+  return {status:'可判定',avg,index:avg/4*100,level};
+}
+function talentId(p){let po=potential(p),pf=perf(p);if(!po.level||pf===null)return null;let y=po.level,x=pf>=4?'高':pf>=3?'中':'低';let r=y==='高'?0:y==='中'?1:2,c=x==='低'?0:x==='中'?1:2;return r*3+c+1}
+function scoreOptions(v){let a=['','0','1','2','3','4'];return a.map(x=>`<option value="${x}" ${String(v)===x?'selected':''}>${x===''?'— 未評 —':x+' 分'}</option>`).join('')}
+function gradeOptions(v){return ['','A+','A','A-','M','N'].map(x=>`<option ${v===x?'selected':''}>${x}</option>`).join('')}
+function workResultText(p){
+  const wid=workId(p);
+  return wid?`${wid}｜${workBoxes[wid-1].name}`:'—';
+}
+function potentialResultText(p){
+  const po=potential(p);
+  return po.avg!==null?po.avg.toFixed(2):po.status;
+}
+function talentResultText(p){
+  const tid=talentId(p),po=potential(p),pfStatus=performanceStatus(p);
+  return tid
+    ? `${tid}｜${talentBoxes[tid-1].name}`
+    : (pfStatus!=='可判定'
+        ? pfStatus
+        : (po.status==='尚未評估'||po.status==='評估未完整'
+            ? '證據不足｜潛力未完整'
+            : '—'));
+}
+function rowHTML(p,i){
+  return `<tr>
+<td><input value="${esc(p.dept)}" oninput="setv(${i},'dept',this.value,this)"></td>
+<td><input value="${esc(p.name)}" oninput="setv(${i},'name',this.value,this)"></td>
+<td><input type="number" step="any" value="${esc(p.hours)}" oninput="setv(${i},'hours',this.value,this)"></td>
+<td><input type="number" min="0" max="5" step="any" value="${esc(p.value)}" oninput="setv(${i},'value',this.value,this)"></td>
+<td class="calc work-calc">${workResultText(p)}</td>
+<td><select onchange="setv(${i},'h1',this.value,this)">${gradeOptions(p.h1)}</select></td>
+<td><select onchange="setv(${i},'h2',this.value,this)">${gradeOptions(p.h2)}</select></td>
+<td><select onchange="setv(${i},'p1',this.value,this)">${scoreOptions(p.p1)}</select></td>
+<td><select onchange="setv(${i},'p2',this.value,this)">${scoreOptions(p.p2)}</select></td>
+<td><select onchange="setv(${i},'p3',this.value,this)">${scoreOptions(p.p3)}</select></td>
+<td><select onchange="setv(${i},'p4',this.value,this)">${scoreOptions(p.p4)}</select></td>
+<td class="calc potential-calc">${potentialResultText(p)}</td>
+<td class="calc talent-calc">${talentResultText(p)}</td>
+<td><button class="btn danger" onclick="removeRow(${i})">刪除</button></td>
+</tr>`}
+function renderRows(){document.getElementById('rows').innerHTML=people.map(rowHTML).join('')}
+function refreshRowComputed(i,sourceEl){
+  const p=people[i];
+  if(!p)return;
+  const row=sourceEl?.closest('tr') || document.querySelector(`#rows tr:nth-child(${i+1})`);
+  if(!row)return;
+  const w=row.querySelector('.work-calc');
+  const po=row.querySelector('.potential-calc');
+  const t=row.querySelector('.talent-calc');
+  if(w)w.textContent=workResultText(p);
+  if(po)po.textContent=potentialResultText(p);
+  if(t)t.textContent=talentResultText(p);
+}
+let autoSaveTimer=null;
+function persistState(silent=true){
+  try{
+    localStorage.setItem(STORAGE,JSON.stringify(people));
+    const mode=document.getElementById('mode')?.value||'initial';
+    localStorage.setItem(MODE_STORAGE,mode);
+    return true;
+  }catch(err){
+    console.error('儲存失敗',err);
+    if(!silent)alert('儲存失敗：瀏覽器可能已停用本機儲存或空間不足。');
+    return false;
+  }
+}
+function scheduleAutoSave(){
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer=setTimeout(()=>persistState(true),250);
+}
+function setPotentialMode(v){
+  renderAll();
+  persistState(true);
+}
+function setv(i,k,v,sourceEl){
+  people[i][k]=v;
+  refreshRowComputed(i,sourceEl);
+  renderWork();
+  renderTalent();
+  renderManagementOverview();
+  scheduleAutoSave();
+}
+function addRow(focusNew=false){people.push(blank());renderRows();renderAll(false);persistState(true);if(focusNew){requestAnimationFrame(()=>{const rows=document.querySelectorAll('#rows tr');const row=rows[rows.length-1];if(row){row.scrollIntoView({behavior:'smooth',block:'center'});const first=row.querySelector('input,select,textarea');if(first)first.focus()}})}}
+function removeRow(i){people.splice(i,1);renderRows();renderAll(false);persistState(true)}
+function saveData(){if(persistState(false))alert('已儲存在此瀏覽器。')}
+function clearAll(){if(confirm('確定清除全部資料？')){people=[blank()];try{localStorage.removeItem(STORAGE);localStorage.removeItem(MODE_STORAGE)}catch(err){console.warn('清除本機儲存失敗',err)}document.getElementById('mode').value='initial';renderAll();persistState(true)}}
+function matrixHTML(boxes,getId,rowLabels,colLabels){let out='<div class="axis">Y＼X</div>'+colLabels.map(x=>`<div class="axis">${x}</div>`).join('');for(let r=0;r<3;r++){out+=`<div class="axis">${rowLabels[r]}</div>`;for(let c=0;c<3;c++){let id=r*3+c+1,b=boxes[id-1],members=people.filter(p=>validPerson(p)&&getId(p)===id);out+=`<div class="cell"><h3>${id}｜${b.name}</h3><p>${b.desc}</p><div class="count">人數：${members.length}</div><div class="chips">${members.map(p=>`<span class="chip">${esc(p.name)}</span>`).join('')}</div></div>`}}return out}
+function managementSummaryHTML(boxes,getId,kind){
+  const filled=boxes.map(b=>({box:b,members:people.filter(p=>validPerson(p)&&getId(p)===b.id)})).filter(x=>x.members.length);
+  const title=kind==='work'?'工作配置管理摘要':'人才發展管理摘要';
+  const subtitle=kind==='work'?'依工作配置矩陣落點，自動彙整目前有人員之配置狀態與管理意義。':'依人才九宮格落點，自動彙整目前有人員之人才定位與管理意義。';
+  if(!filled.length){
+    return `<div class="management-summary-head"><div class="management-summary-title"><h3>${title}</h3><p>${subtitle}</p></div><div class="management-summary-label">MANAGEMENT SUMMARY</div></div><div class="management-summary-empty">完成可判定人員資料後，系統將自動產生管理摘要。</div>`;
+  }
+  return `<div class="management-summary-head"><div class="management-summary-title"><h3>${title}</h3><p>${subtitle}</p></div><div class="management-summary-label">MANAGEMENT SUMMARY</div></div><div class="management-summary-table"><div class="management-summary-row header"><div>落點</div><div>管理意義</div><div>人數</div><div>成員</div></div>${filled.map(({box,members})=>`<div class="management-summary-row"><div class="management-summary-position"><span class="management-summary-no">${box.id}</span><span>${esc(box.name)}</span></div><div class="management-summary-meaning">${esc(box.desc)}</div><div class="management-summary-count">${members.length}</div><div class="management-summary-members">${members.map(p=>`<span class="management-member">${esc(p.dept?p.dept+' · '+p.name:p.name)}</span>`).join('')}</div></div>`).join('')}</div>`;
+}
+
+function quickPositionHTML(kind){
+  const rows=people.filter(validPerson);
+  if(!rows.length)return '<div class="quick-position-empty">尚無人員資料。</div>';
+
+  return rows.map(p=>{
+    const who=esc(p.name);
+    const dept=p.dept?`<span>${esc(p.dept)}</span>`:'';
+
+    if(kind==='work'){
+      const id=workId(p);
+      if(id){
+        const b=workBoxes[id-1];
+        return `<div class="quick-position-item">${dept}<strong>${who}</strong><span class="quick-position-no">${id}</span><span>${esc(b.name)}</span></div>`;
+      }
+      return `<div class="quick-position-item incomplete">${dept}<strong>${who}</strong><span class="quick-position-no">—</span><span>工作資料不足</span></div>`;
+    }
+
+    const id=talentId(p);
+    if(id){
+      const b=talentBoxes[id-1];
+      return `<div class="quick-position-item">${dept}<strong>${who}</strong><span class="quick-position-no">${id}</span><span>${esc(b.name)}</span></div>`;
+    }
+
+    const pf=performanceStatus(p);
+    const po=potential(p);
+    let reason='證據不足';
+    if(pf!=='可判定') reason=pf;
+    else if(po.status==='尚未評估'||po.status==='評估未完整') reason='證據不足｜潛力未完整';
+
+    return `<div class="quick-position-item incomplete">${dept}<strong>${who}</strong><span class="quick-position-no">—</span><span>${esc(reason)}</span></div>`;
+  }).join('');
+}
+
+function renderWork(){let valid=people.filter(p=>validPerson(p)&&workId(p)!==null),hs=valid.map(p=>num(p.hours)),vs=valid.map(p=>num(p.value));document.getElementById('wTotal').textContent=valid.length;document.getElementById('wHours').textContent=hs.length?(hs.reduce((a,b)=>a+b,0)/hs.length).toFixed(2):'0.00';document.getElementById('wValue').textContent=vs.length?(vs.reduce((a,b)=>a+b,0)/vs.length).toFixed(2):'0.00';document.getElementById('wHigh').textContent=valid.filter(p=>valueLevel(p)==='高').length;document.getElementById('wMid').textContent=valid.filter(p=>valueLevel(p)==='中').length;document.getElementById('wLow').textContent=valid.filter(p=>valueLevel(p)==='低').length;document.getElementById('workQuick').innerHTML=quickPositionHTML('work');document.getElementById('workMatrix').innerHTML=matrixHTML(workBoxes,workId,['高工作價值 ≥4.0','中工作價值 3.0～<4.0','低工作價值 <3.0'],['低工作飽和 <7h','中工作飽和 7～<9h','高工作飽和 ≥9h']);document.getElementById('workManagementSummary').innerHTML=managementSummaryHTML(workBoxes,workId,'work')}
+function renderTalent(){let persons=people.filter(validPerson),valid=persons.filter(p=>talentId(p)!==null),allP=persons.map(p=>potential(p)),missing=persons.filter(p=>talentId(p)===null).length,avgs=allP.filter(x=>x.avg!==null).map(x=>x.avg);document.getElementById('tTotal').textContent=valid.length;document.getElementById('tHigh').textContent=valid.filter(p=>potential(p).level==='高').length;document.getElementById('tMissing').textContent=missing;document.getElementById('tAvg').textContent=avgs.length?(avgs.reduce((a,b)=>a+b,0)/avgs.length).toFixed(2)+' / 4':'—';document.getElementById('talentQuick').innerHTML=quickPositionHTML('talent');document.getElementById('talentMatrix').innerHTML=matrixHTML(talentBoxes,talentId,['高潛力','中潛力','低潛力'],['低績效 <3.0','中績效 3.0～<4.0','高績效 ≥4.0']);document.getElementById('talentManagementSummary').innerHTML=managementSummaryHTML(talentBoxes,talentId,'talent')}
+
+function renderManagementOverview(){
+  const persons=people.filter(validPerson);
+  const total=persons.length;
+  const workReady=persons.filter(p=>workId(p)!==null).length;
+  const talentReady=persons.filter(p=>talentId(p)!==null).length;
+  const potentialPending=persons.filter(p=>{
+    const po=potential(p);
+    const perfIncomplete=performanceStatus(p)!=='可判定';
+    const potentialIncomplete=po.status==='尚未評估'||po.status==='評估未完整';
+    return perfIncomplete||potentialIncomplete;
+  }).length;
+
+  const criticalLoad=persons.filter(p=>workId(p)===3).length;
+  const priorityImprove=persons.filter(p=>workId(p)===9).length;
+  const starTalent=persons.filter(p=>talentId(p)===3).length;
+  const growthTalent=persons.filter(p=>[1,2].includes(talentId(p))).length;
+
+  const map={
+    mPeople:total,
+    mWorkReady:workReady,
+    mTalentReady:talentReady,
+    mPotentialPending:potentialPending,
+    mCriticalLoad:criticalLoad,
+    mPriorityImprove:priorityImprove,
+    mStarTalent:starTalent,
+    mGrowthTalent:growthTalent
+  };
+  Object.entries(map).forEach(([id,val])=>{
+    const el=document.getElementById(id);
+    if(el)el.textContent=val;
+  });
+}
+
+function renderAll(rows=true){if(rows)renderRows();renderWork();renderTalent();renderManagementOverview()}
+function exportJSON(){
+  const backup={
+    format:'FHC_Talent_Assessment_Backup',
+    version:1,
+    system:'人才配置與發展鑑別評定系統',
+    exportedAt:new Date().toISOString(),
+    potentialMode:document.getElementById('mode')?.value||'initial',
+    people:people
+  };
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json;charset=utf-8'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  const d=new Date(),pad=n=>String(n).padStart(2,'0');
+  const stamp=`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}`;
+  a.download=`人才配置與發展鑑別評定系統_JSON備份_${stamp}.json`;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function normalizePerson(raw){
+  const p=blank(),keys=['dept','name','hours','value','h1','h2','p1','p2','p3','p4'];
+  if(raw&&typeof raw==='object'&&!Array.isArray(raw))keys.forEach(k=>p[k]=String(raw[k]??'').trim());
+  return p;
+}
+document.getElementById('jsonFile').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const data=JSON.parse(r.result);
+      const list=Array.isArray(data)?data:data?.people;
+      if(!Array.isArray(list))throw new Error('備份檔格式不正確');
+      if(!confirm(`將以 JSON 備份還原 ${list.length} 筆人員資料，並取代目前畫面資料。是否繼續？`)){e.target.value='';return;}
+      people=list.map(normalizePerson);
+      if(!people.length)people=[blank()];
+      if(!Array.isArray(data)&&['initial','strict'].includes(data.potentialMode))document.getElementById('mode').value=data.potentialMode;
+      persistState(true);
+      renderAll();
+      alert(`JSON 還原完成，共載入 ${list.length} 筆人員資料。`);
+    }catch(err){alert('JSON 還原失敗：'+err.message)}
+    e.target.value='';
+  };
+  r.onerror=()=>{alert('JSON 檔案讀取失敗。');e.target.value=''};
+  r.readAsText(f,'utf-8');
+});
+function downloadCSVExample(){
+  const headers=['部門','姓名','工作飽和度（換算時數/天）','工作價值度（自評40%＋主管評60%）','上半年考績','下半年考績','學習敏捷與適應_0至4','問題判斷與解決_0至4','主動承擔與成長動機_0至4','協作影響與帶動_0至4'];
+  const rows=[
+    ['製造部','範例員工A','8.0','4.2','A','A-','4','3','3','4'],
+    ['工程部','範例員工B','9.2','3.6','A+','','3','3','4','3'],
+    ['管理部','範例員工C','6.5','2.8','M','N','2','2','','2']
+  ];
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const csv='\ufeff'+[headers,...rows].map(row=>row.map(q).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='人才配置與發展鑑別評定系統_CSV匯入範例.csv';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function exportCSV(){let headers=['部門','姓名','工作飽和度（換算時數/天）','工作價值度（自評40%＋主管評60%）','上半年考績','下半年考績','學習敏捷與適應_0至4','問題判斷與解決_0至4','主動承擔與成長動機_0至4','協作影響與帶動_0至4'];let keys=['dept','name','hours','value','h1','h2','p1','p2','p3','p4'];let q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';let csv='\ufeff'+headers.map(q).join(',')+'\n'+people.map(p=>keys.map(k=>q(p[k])).join(',')).join('\n');let blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='人才配置與發展鑑別評定系統_通用潛力資料.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function parseCSV(text){let rows=[],row=[],field='',q=false;for(let i=0;i<text.length;i++){let ch=text[i];if(q){if(ch==='"'&&text[i+1]==='"'){field+='"';i++}else if(ch==='"')q=false;else field+=ch}else{if(ch==='"')q=true;else if(ch===','){row.push(field);field=''}else if(ch==='\n'){row.push(field);rows.push(row);row=[];field=''}else if(ch!=='\r')field+=ch}}row.push(field);if(row.some(x=>x!==''))rows.push(row);return rows}
+document.getElementById('csvFile').addEventListener('change',e=>{
+  const f=e.target.files[0];
+  if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const rows=parseCSV(r.result);
+      if(rows.length<2)throw new Error('CSV 沒有可匯入的人員資料');
+      const dataRows=rows.slice(1).filter(x=>x.some(v=>String(v??'').trim()!==''));
+      if(!confirm(`將匯入 ${dataRows.length} 筆 CSV 人員資料，並取代目前畫面資料。是否繼續？`))return;
+      const keys=['dept','name','hours','value','h1','h2','p1','p2','p3','p4'];
+      people=dataRows.map(arr=>{const p=blank();keys.forEach((k,i)=>p[k]=String(arr[i]??'').trim());return p});
+      if(!people.length)people=[blank()];
+      persistState(true);
+      renderAll();
+      alert(`CSV 匯入完成，共載入 ${dataRows.length} 筆人員資料。`);
+    }catch(err){
+      alert('CSV 匯入失敗：'+err.message);
+    }finally{
+      e.target.value='';
+    }
+  };
+  r.onerror=()=>{alert('CSV 檔案讀取失敗。');e.target.value=''};
+  r.readAsText(f,'utf-8');
+});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
+let savedMode='initial';
+try{
+  people=JSON.parse(localStorage.getItem(STORAGE)||'[]');
+  savedMode=localStorage.getItem(MODE_STORAGE)||'initial';
+}catch(e){
+  people=[];
+  savedMode='initial';
+  console.warn('瀏覽器本機儲存無法使用，系統將以本次工作階段繼續運作。',e);
+}
+if(!people.length)people=[blank()];
+if(['initial','strict'].includes(savedMode))document.getElementById('mode').value=savedMode;
+renderAll();
+</script>
+</body></html>
